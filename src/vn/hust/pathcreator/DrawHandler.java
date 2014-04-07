@@ -68,7 +68,34 @@ public class DrawHandler implements MouseListener, MouseMotionListener {
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
 		long timeStamp = System.currentTimeMillis();
-		if (timeStamp - prevTimeStamp >= plDraw.getTimeStep()) {
+		if (timeStamp - prevTimeStamp < plDraw.getTimeStep()) return;
+
+		if (plDraw.getPathLen() > 0) {
+			Point lastOffseted = plDraw.getPath()[plDraw.getPathLen() - 1];
+			Point last = new Point(lastOffseted.getX() + plDraw.getBaseOffsetX(),
+					lastOffseted.getY() + plDraw.getBaseOffsetY());
+			double d = Point.distance(last, new Point(arg0.getX(), arg0.getY()));
+
+			if (d < plDraw.getMinDistance()) {
+				return;
+			} else if (d <= plDraw.getMaxDistance()) {
+				plDraw.recordPoint(arg0.getX(), arg0.getY());
+				plDraw.repaint();
+				prevTimeStamp = timeStamp;
+			} else {
+				// Add more than one point
+				int n = (int) (d / plDraw.getMaxDistance()) + 1;
+				int subx = (arg0.getX() - last.getX()) / n;
+				int suby = (arg0.getY() - last.getY()) / n;
+
+				for (int i = 0; i < n; i++) {
+					plDraw.recordPoint(last.getX() + (i + 1) * subx,
+										last.getY() + (i + 1) * suby);
+				}
+				plDraw.repaint();
+				prevTimeStamp = timeStamp;
+			}
+		} else {
 			plDraw.recordPoint(arg0.getX(), arg0.getY());
 			plDraw.repaint();
 			prevTimeStamp = timeStamp;

@@ -51,6 +51,8 @@ public class PathCreator extends JFrame implements ComponentListener {
 	private Box bxConfigUnitScale;
 	private Box bxConfigMaxLen;
 	private Box bxConfigTimeStep;
+	private Box bxConfigMinDistance;
+	private Box bxConfigMaxDistance;
 	private JTextField tfCanvasWidth;
 	private JTextField tfCanvasHeight;
 	private JTextField tfBaseOffsetX;
@@ -58,6 +60,8 @@ public class PathCreator extends JFrame implements ComponentListener {
 	private JTextField tfUnitScale;
 	private JTextField tfMaxPathLen;
 	private JTextField tfTimeStep;
+	private JTextField tfMinDistance;
+	private JTextField tfMaxDistance;
 	private JButton btApply;
 	private JLabel lbResult;
 	private JTextArea taResult;
@@ -119,6 +123,8 @@ public class PathCreator extends JFrame implements ComponentListener {
 		bxConfigUnitScale = Box.createHorizontalBox();
 		bxConfigMaxLen = Box.createHorizontalBox();
 		bxConfigTimeStep = Box.createHorizontalBox();
+		bxConfigMinDistance = Box.createHorizontalBox();
+		bxConfigMaxDistance = Box.createHorizontalBox();
 		
 		tfCanvasWidth = new JTextField(String.valueOf(DrawingPanel.DEFAULT_WIDTH), 4);
 		tfCanvasHeight = new JTextField(String.valueOf(DrawingPanel.DEFAULT_HEIGHT), 4);
@@ -127,6 +133,8 @@ public class PathCreator extends JFrame implements ComponentListener {
 		tfUnitScale = new JTextField(String.valueOf(DrawingPanel.DEFAULT_UNIT_SCALE), 4);
 		tfMaxPathLen = new JTextField(String.valueOf(DrawingPanel.DEFAULT_MAX_PATH_LEN), 4);
 		tfTimeStep = new JTextField(String.valueOf(DrawingPanel.DEFAULT_TIMESTEP), 4);
+		tfMinDistance = new JTextField(String.valueOf(DrawingPanel.DEFAULT_MIN_DISTANCE), 4);
+		tfMaxDistance = new JTextField(String.valueOf(DrawingPanel.DEFAULT_MAX_DISTANCE), 4);
 		btApply = new JButton("Apply");
 		btApply.setAlignmentX(CENTER_ALIGNMENT);
 		lbResult = new JLabel("Result:");
@@ -147,6 +155,10 @@ public class PathCreator extends JFrame implements ComponentListener {
 		bxConfigMaxLen.add(tfMaxPathLen);
 		bxConfigTimeStep.add(new JLabel("Time step (ms):"));
 		bxConfigTimeStep.add(tfTimeStep);
+		bxConfigMinDistance.add(new JLabel("Min distance (px):"));
+		bxConfigMinDistance.add(tfMinDistance);
+		bxConfigMaxDistance.add(new JLabel("Max distance (px):"));
+		bxConfigMaxDistance.add(tfMaxDistance);
 		
 		bxConfig.add(bxConfigCanvasSize);
 		bxConfig.add(bxConfigBaseX);
@@ -154,6 +166,8 @@ public class PathCreator extends JFrame implements ComponentListener {
 		bxConfig.add(bxConfigUnitScale);
 		bxConfig.add(bxConfigMaxLen);
 		bxConfig.add(bxConfigTimeStep);
+		bxConfig.add(bxConfigMinDistance);
+		bxConfig.add(bxConfigMaxDistance);
 		bxConfig.add(btApply);
 		bxConfig.add(lbResult);
 		bxConfig.add(new JScrollPane(taResult,
@@ -175,8 +189,11 @@ public class PathCreator extends JFrame implements ComponentListener {
 		plDraw.addMouseListener(drawHandler);
 		plDraw.addMouseMotionListener(drawHandler);
 		
-		configHandler = new ConfigHandler(tfCanvasWidth, tfCanvasHeight, tfBaseOffsetX,
-				tfBaseOffsetY, tfUnitScale, tfMaxPathLen, tfTimeStep, plDraw, taResult, lbResult);
+		configHandler = new ConfigHandler(tfCanvasWidth, tfCanvasHeight,
+				tfBaseOffsetX, tfBaseOffsetY,
+				tfUnitScale, tfMaxPathLen, tfTimeStep,
+				tfMinDistance, tfMaxDistance,
+				plDraw, taResult, lbResult);
 		btApply.addActionListener(configHandler);
 		
 		// Add panels

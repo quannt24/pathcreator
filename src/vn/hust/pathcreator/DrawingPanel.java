@@ -24,11 +24,15 @@ public class DrawingPanel extends JPanel {
 	public static final int DEFAULT_BASE_OFFSET_X = 100;
 	public static final int DEFAULT_BASE_OFFSET_Y = 100;
 	// Default number of pixels representing 1 in drawing unit
-	public static final int DEFAULT_UNIT_SCALE = 10;
+	public static final int DEFAULT_UNIT_SCALE = 2;
 	// Default max number of anchor points in a path
-	public static final int DEFAULT_MAX_PATH_LEN = 1000;
+	public static final int DEFAULT_MAX_PATH_LEN = 2000;
 	// Default time step for recording anchor points (ms)
-	public static final int DEFAULT_TIMESTEP = 500;
+	public static final int DEFAULT_TIMESTEP = 250;
+	// Default min distance between two consecutive points (px)
+	public static final int DEFAULT_MIN_DISTANCE = 10;
+	// Default max distance between two consecutive points (px)
+	public static final int DEFAULT_MAX_DISTANCE = 30;
 	
 	// Base offsets (Offsets of origin of coordinate axes, relative to top left corner of drawing pane)
 	private int baseOffsetX;
@@ -36,6 +40,8 @@ public class DrawingPanel extends JPanel {
 	private int unitScale;
 	private int maxPathLen;
 	private int timeStep; // Time step between two continual recording times
+	private int minDistance; // Min distance between two consecutive points
+	private int maxDistance; // Min distance between two consecutive points
 	
 	private int pathLen;
 	private Point[] path; // Path recorded in pixels
@@ -50,6 +56,8 @@ public class DrawingPanel extends JPanel {
 		unitScale = DEFAULT_UNIT_SCALE;
 		maxPathLen = DEFAULT_MAX_PATH_LEN;
 		timeStep = DEFAULT_TIMESTEP;
+		minDistance = DEFAULT_MIN_DISTANCE;
+		maxDistance = DEFAULT_MAX_DISTANCE;
 		
 		pathLen = 0;
 		path = new Point[maxPathLen];
@@ -99,10 +107,46 @@ public class DrawingPanel extends JPanel {
 	}
 
 	/**
+	 * @return the minDistance
+	 */
+	public int getMinDistance() {
+		return minDistance;
+	}
+
+	/**
+	 * @param minDistance the minDistance to set
+	 */
+	public void setMinDistance(int minDistance) {
+		this.minDistance = minDistance;
+	}
+
+	/**
+	 * @return the maxDistance
+	 */
+	public int getMaxDistance() {
+		return maxDistance;
+	}
+
+	/**
+	 * @param maxDistance the maxDistance to set
+	 */
+	public void setMaxDistance(int maxDistance) {
+		this.maxDistance = maxDistance;
+	}
+
+	/**
 	 * Get current path length
 	 */
 	public int getPathLen() {
 		return pathLen;
+	}
+	
+	/**
+	 * Get current pixel path
+	 * @return
+	 */
+	public Point[] getPath() {
+		return path;
 	}
 	
 	public Coordinate[] getRealPath() {

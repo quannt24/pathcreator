@@ -19,6 +19,8 @@ public class ConfigHandler implements ActionListener {
 	private JTextField tfUnitScale;
 	private JTextField tfMaxPathLen;
 	private JTextField tfTimeStep;
+	private JTextField tfMinDistance;
+	private JTextField tfMaxDistance;
 	
 	private DrawingPanel plDraw;
 	private JTextArea taResult;
@@ -26,8 +28,9 @@ public class ConfigHandler implements ActionListener {
 	
 	public ConfigHandler(JTextField tfCanvasWidth, JTextField tfCanvasHeight,
 			JTextField tfBaseOffsetX, JTextField tfBaseOffsetY, JTextField tfUnitScale,
-			JTextField tfMaxPathLen, JTextField tfTimeStep, DrawingPanel plDraw,
-			JTextArea taResult, JLabel lbResult) {
+			JTextField tfMaxPathLen, JTextField tfTimeStep,
+			JTextField tfMinDistance, JTextField tfMaxDistance,
+			DrawingPanel plDraw, JTextArea taResult, JLabel lbResult) {
 		this.tfCanvasWidth = tfCanvasWidth;
 		this.tfCanvasHeight = tfCanvasHeight;
 		this.tfBaseOffsetX = tfBaseOffsetX;
@@ -35,6 +38,8 @@ public class ConfigHandler implements ActionListener {
 		this.tfUnitScale = tfUnitScale;
 		this.tfMaxPathLen = tfMaxPathLen;
 		this.tfTimeStep = tfTimeStep;
+		this.tfMinDistance = tfMinDistance;
+		this.tfMaxDistance = tfMaxDistance;
 		
 		this.plDraw = plDraw;
 		this.taResult = taResult;
@@ -52,6 +57,8 @@ public class ConfigHandler implements ActionListener {
 		plDraw.setUnitScale(Integer.valueOf(tfUnitScale.getText()));
 		plDraw.setMaxPathLen(Integer.valueOf(tfMaxPathLen.getText()));
 		plDraw.setTimeStep(Integer.valueOf(tfTimeStep.getText()));
+		plDraw.setMinDistance(Integer.valueOf(tfMinDistance.getText()));
+		plDraw.setMaxDistance(Integer.valueOf(tfMaxDistance.getText()));
 		
 		// Clear result
 		plDraw.clear();

@@ -10,6 +10,10 @@ public class Coordinate {
 
 	private double x, y;
 	
+	public static double distance(Coordinate c1, Coordinate c2) {
+		return Math.sqrt((c1.getX() - c2.getX()) * (c1.getX() - c2.getX()) + (c1.getY() - c2.getY()) * (c1.getY() - c2.getY()));
+	}
+	
 	public Coordinate() {
 		this(0, 0);
 	}
